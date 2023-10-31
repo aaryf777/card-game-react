@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
-import Header from './Header';
+import {  useNavigate } from 'react-router-dom';
 import axios from './services/httpService'
-import Counter from './Counter';
-import EndGameModal from './EndGameModal';
 import Spinner from './common/Spinner';
 const trophy = '/images/icons/trophy2.svg';
-const coin = '/images/icons/coinIcon.png';
 
 export default function Home() {
     const navigate = useNavigate();
@@ -25,7 +21,7 @@ export default function Home() {
         <div className='w-full ' >
             {/* <Header/> */}
             <div className='w-full p-2' >
-            <div className='text-sm   mb-3 px-1 uppercase'>Live Contests</div>
+            <div className='text-base font-semibold text-yellow mb-3 px-1 uppercase'>Live Contests</div>
                 { loading ? <div className='w-full h-[90vh]'><Spinner/></div>
                     : Object.entries(contestTypes)?.map(([key,value]) => <div className='w-full my-2'>
                         

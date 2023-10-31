@@ -28,7 +28,7 @@ export default function Profile() {
   }, [])
   const router = useNavigate();
   if (loading || error) return <div className='w-full h-[90vh]'><Spinner/></div>
-  if(viewAll) return <ContestHistory contests={user.contestHistory} setViewAll={setViewAll} ind={ind} setInd={setInd}/>
+  if(viewAll) return <ContestHistory contests={user?.contestHistory} setViewAll={setViewAll} ind={ind} setInd={setInd}/>
   return (
     <div className='w-full'>
       <div className='w-full h-40 bg-black shadow-xl flex flex-col justify-between'>
@@ -39,13 +39,13 @@ export default function Profile() {
         <div className='w-full pb-3 flex gap-3 items-center justify-center'>
           <img className='w-12 h-12 rounded-full border border-white' src={avtaar} />
           <div className='flex flex-col gap-1'>
-            <h1 className='text-base text-white font-bold'>{user.userName}</h1>
-            <p className='text-sm text-gray-2 font-semibold'>{user.email}</p>
+            <h1 className='text-base text-white font-bold'>{user?.userName}</h1>
+            <p className='text-sm text-gray-2 font-semibold'>{user?.email}</p>
           </div>
         </div>
         <div className='p-1 w-full justify-end items-center flex gap-1 '>
           <img className='w-5 h-5 cursor-pointer' src={clock} />
-          <p className=' text-xs text-gray-2'>Joined since {format(user.created_at, "MMM, yyyy")}</p>
+          <p className=' text-xs text-gray-2'>Joined since {format(user?.created_at, "MMM, yyyy")}</p>
         </div>
       </div>
       <div className='p-3 w-full flex justify-between'>
@@ -57,7 +57,7 @@ export default function Profile() {
       <div className='w-full flex flex-col gap-2 items-center justify-center'>
         <div className='flex flex-col items-center gap-1'>
           <p className='text-sm text-gray-2'>Total Balance</p>
-          <p className='text-base font-bold text-white'>&#x20B9; {user.coins}</p>
+          <p className='text-base font-bold text-white'>&#x20B9; {user?.coins}</p>
         </div>
         <button onClick={() => setOpenWallet(true)} className='rounded-md font-semibold text-white bg-green p-2 text-sm cursor-pointer hover:opacity-50 '>ADD CASH</button>
         {openWallet && <Wallet setOpenWallet={setOpenWallet}/>}
@@ -69,19 +69,19 @@ export default function Profile() {
         <div className='w-full  flex'>
           <div className='w-1/4 flex flex-col justify-center items-center py-2 gap-2'>
             <p className='text-sm text-gray-2'>Played</p>
-            <p className='text-base font-bold text-white'>{user.contests.played}</p>
+            <p className='text-base font-bold text-white'>{user?.contests.played}</p>
           </div>
           <div className='w-1/4 flex flex-col justify-center items-center py-2 border-x gap-2'>
             <p className='text-sm text-gray-2'>Won</p>
-            <p className='text-base font-bold text-green'>{user.contests.won}</p>
+            <p className='text-base font-bold text-green'>{user?.contests.won}</p>
           </div>
           <div className='w-1/4 flex flex-col justify-center border-r items-center py-2 gap-2'>
             <p className='text-sm text-gray-2'>Lost</p>
-            <p className='text-base font-bold text-red'>{user.contests.lost}</p>
+            <p className='text-base font-bold text-red'>{user?.contests.lost}</p>
           </div>
           <div className='w-1/4 flex flex-col justify-center items-center py-2 gap-2'>
             <p className='text-sm text-gray-2'>Win Rate</p>
-            <p className='text-base font-bold text-white'>{parseFloat((user.contests.won/user.contests.played*100)).toFixed(2)} %</p>
+            <p className='text-base font-bold text-white'>{parseFloat((user?.contests.won/user?.contests.played*100)).toFixed(2)} %</p>
           </div>
         </div>
       </div>
@@ -90,9 +90,9 @@ export default function Profile() {
       </h1>
       <div className='rounded-xl mx-3 flex justify-evenly bg-gray shadow-xl p-3'>
         {
-          user.contestHistory?.slice(0, 5).map(contest => (
-            <div className={`w-8 h-8 rounded-full p-1 text-sm font-bold bg-slate-800 ${contest.users.find(u => u.rank === 1).email === user.email ? 'text-green' : 'text-red'}  flex border justify-center items-center`}>
-              <span>{contest.users[0].email === user.email ? 'W' : 'L'}</span>
+          user?.contestHistory?.slice(0, 5).map(contest => (
+            <div className={`w-8 h-8 rounded-full p-1 text-sm font-bold bg-slate-800 ${contest.users.find(u => u.rank === 1)?.email === user?.email ? 'text-green' : 'text-red'}  flex border justify-center items-center`}>
+              <span>{contest.users[0]?.email === user?.email ? 'W' : 'L'}</span>
             </div>
           ))
         }
@@ -106,7 +106,7 @@ export default function Profile() {
       </div>
       <div className='w-full flex p-3 overflow-scroll'>
         {
-          user.contestHistory?.slice(0, 5).map((contest,i) => (
+          user?.contestHistory?.slice(0, 5).map((contest,i) => (
             <div onClick={() => {setInd(i);setViewAll(true)}} className='min-w-[300px] bg-slate-800 rounded-md m-1 cursor-pointer' >
               <div className='border-b text-slate-400 text-xs font-semibold border-gray p-2  flex justify-between'>
                 <div className='w-full flex justify-between'>
